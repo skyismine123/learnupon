@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+/* Base */
+@import "src/css/base/base";
+
+/* Vendors - Material */
+@import "src/css/vendor/material/expansion-panel";
+@import "src/css/vendor/material/toolbar";
+@import "src/css/vendor/material/form-field";
+
+/* Custom */
+@import "src/css/vendor/custom/spinner";

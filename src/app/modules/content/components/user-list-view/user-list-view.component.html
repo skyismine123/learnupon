@@ -1,0 +1,21 @@
+<div *ngIf="listOfUsers$ | async as users; else loading" class="mat-elevation-z8">
+  <div class="panel-wrapper">
+    <mat-expansion-panel *ngFor="let user of users">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{user.first_name}}  {{user.last_name}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>
+        {{ user.getContentDisplay()}}
+      </p>
+    </mat-expansion-panel>
+  </div>
+</div>
+<div class="button-wrapper">
+  <button (click)="onClick()" mat-flat-button color="primary">Add user</button>
+</div>
+<ng-template #loading>
+  <div class="loader">Loading</div>
+</ng-template>
+

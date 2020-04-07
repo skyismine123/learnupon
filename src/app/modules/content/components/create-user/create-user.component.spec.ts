@@ -9,13 +9,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {of} from 'rxjs';
 import {User} from '../../../../model/user.model';
 import {Router} from '@angular/router';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('CreateUserComponent', () => {
   let spectator: Spectator<CreateUserComponent>;
   const createComponent = createRoutingFactory({
     component: CreateUserComponent,
     imports: [ReactiveFormsModule, MatButtonModule, MatInputModule,
-      MatFormFieldModule, RouterTestingModule],
+      MatFormFieldModule, MatSnackBarModule, RouterTestingModule],
     mocks: [UserService],
     detectChanges: false
   });

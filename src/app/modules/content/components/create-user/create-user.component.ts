@@ -5,6 +5,7 @@ import {User} from '../../../../model/user.model';
 import {Router} from '@angular/router';
 import {Subject, throwError} from 'rxjs';
 import {catchError, takeUntil} from 'rxjs/operators';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-create-user',
@@ -17,7 +18,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   user: User = new User();
   unSubscribe = new Subject();
 
-  constructor(private userService: UserService, private fb: FormBuilder, private router: Router) {
+  constructor(private userService: UserService, private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar) {
 
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -43,7 +44,10 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   saveUser(): void {
     this.userService.createUser(this.user)
       .pipe(
-        catchError(this.handleError)
+        catchError(error => {
+          this.snackBar.open('An unexpected error occurred.', null, {duration: 4000});
+          return this.handleError(error);
+        })
       )
       .subscribe(response => {
           this.router.navigate(['/users']).then();
